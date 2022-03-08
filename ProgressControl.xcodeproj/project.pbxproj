@@ -13,6 +13,7 @@
 		F7133C4527D1382E00137DB1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7133C4327D1382E00137DB1 /* LaunchScreen.storyboard */; };
 		F7133C4D27D13CBE00137DB1 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7133C4C27D13CBE00137DB1 /* TasksViewController.swift */; };
 		F7133C4F27D13D7000137DB1 /* TasksCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7133C4E27D13D7000137DB1 /* TasksCollectionViewCell.swift */; };
+		F798557927D7B4B30010425F /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F798557827D7B4B30010425F /* NewTaskViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		F7133C4627D1382E00137DB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F7133C4C27D13CBE00137DB1 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		F7133C4E27D13D7000137DB1 /* TasksCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksCollectionViewCell.swift; sourceTree = "<group>"; };
+		F798557827D7B4B30010425F /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				F7133C3527D1382D00137DB1 /* AppDelegate.swift */,
 				F7133C4C27D13CBE00137DB1 /* TasksViewController.swift */,
 				F7133C4E27D13D7000137DB1 /* TasksCollectionViewCell.swift */,
+				F798557827D7B4B30010425F /* NewTaskViewController.swift */,
 				F7133C4127D1382E00137DB1 /* Assets.xcassets */,
 				F7133C4327D1382E00137DB1 /* LaunchScreen.storyboard */,
 				F7133C4627D1382E00137DB1 /* Info.plist */,
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7133C4D27D13CBE00137DB1 /* TasksViewController.swift in Sources */,
+				F798557927D7B4B30010425F /* NewTaskViewController.swift in Sources */,
 				F7133C3627D1382D00137DB1 /* AppDelegate.swift in Sources */,
 				F7133C4F27D13D7000137DB1 /* TasksCollectionViewCell.swift in Sources */,
 				F7133C4027D1382D00137DB1 /* ProgressControl.xcdatamodeld in Sources */,

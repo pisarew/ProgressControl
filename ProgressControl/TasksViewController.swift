@@ -50,9 +50,9 @@ class TasksViewController: UICollectionViewController {
         navigationController?.navigationBar.tintColor = .cyan
     }
     @objc private func addNewTask() {
-//        let newTaskViewController = NewTaskViewController()
-//        newTaskViewController.modalPresentationStyle = .fullScreen
-//        present(newTaskViewController, animated: true)
+        let newTaskViewController = NewTaskViewController()
+        newTaskViewController.modalPresentationStyle = .fullScreen
+        present(newTaskViewController, animated: true)
         
         
     }
