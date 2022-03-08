@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import CoreData
 
 class NewTaskViewController: UIViewController {
     
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     lazy private var nameFild: UITextField = {
         let textFild = UITextField()
@@ -21,6 +23,7 @@ class NewTaskViewController: UIViewController {
         button.backgroundColor = .blue
         button.setTitle("Добавить", for: .normal)
         button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(add), for: .touchUpInside)
         return button
     }()
     
@@ -69,9 +72,27 @@ class NewTaskViewController: UIViewController {
         ])
     }
     
+    @objc private func add(){
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: "Task", in: context) else { return }
+        guard let task = NSManagedObject(entity: entityDescription, insertInto: context) as? Task else { return }
+        
+        task.name = nameFild.text
+        
+        if context.hasChanges{
+            do {
+                try context.save()
+            } catch let error {
+                print(error)
+            }
+        }
+        dismiss(animated: true)
+    }
+    
     @objc private func done(){
         dismiss(animated: true)
     }
+    
+    
     
 
     /*
