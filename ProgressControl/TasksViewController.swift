@@ -6,28 +6,31 @@
 //
 
 import UIKit
+import CoreData
 
 private let reuseIdentifier = "Cell"
 
 class TasksViewController: UICollectionViewController {
+    
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    private var tasks: [Task] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        
         self.collectionView!.register(TasksCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         setupNavigationBar()
         
         self.collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
-        
-        
 
-        // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadData()
+    }
+    
     
     private func setupNavigationBar() {
         title = "Задачи"
@@ -56,6 +59,19 @@ class TasksViewController: UICollectionViewController {
         
         
     }
+    
+    private func loadData(){
+        let fetch: NSFetchRequest<Task> = Task.fetchRequest()
+        
+        do {
+            tasks = try context.fetch(fetch)
+            collectionView.reloadData()
+        } catch {
+            print(error)
+        }
+        
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -70,12 +86,12 @@ class TasksViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 10
+        return tasks.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TasksCollectionViewCell
-        cell.taskName.text = "не знаю как сделать красиво"
+        cell.taskName.text = tasks[indexPath.row].name
         cell.backgroundColor = .cyan
         cell.layer.cornerRadius = 15
         
