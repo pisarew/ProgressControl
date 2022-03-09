@@ -10,10 +10,16 @@ import CoreData
 
 private let reuseIdentifier = "Cell"
 
+enum EditOrCansel{
+    case edit
+    case cansel
+}
+
 class TasksViewController: UICollectionViewController {
     
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
+
+    private var editDan: EditOrCansel = .edit
     private var tasks: [Task] = []
 
     override func viewDidLoad() {
@@ -50,14 +56,28 @@ class TasksViewController: UICollectionViewController {
             action: #selector(addNewTask)
         )
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Изменить", style: .plain, target: self, action: #selector(editAction))
+        
+        
         navigationController?.navigationBar.tintColor = .cyan
     }
     @objc private func addNewTask() {
         let newTaskViewController = NewTaskViewController()
         newTaskViewController.modalPresentationStyle = .fullScreen
         present(newTaskViewController, animated: true)
+    }
+    
+    @objc private func editAction(){
         
-        
+        if editDan == .edit{
+            navigationItem.leftBarButtonItem?.title = "Отмена"
+            editDan = .cansel
+        }
+        else{
+            navigationItem.leftBarButtonItem?.title = "Изменить"
+            editDan = .edit
+        }
+        collectionView.reloadData()
     }
     
     private func loadData(){
@@ -71,16 +91,6 @@ class TasksViewController: UICollectionViewController {
         }
         
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     // MARK: UICollectionViewDataSource
 
@@ -94,15 +104,23 @@ class TasksViewController: UICollectionViewController {
         cell.taskName.text = tasks[indexPath.row].name
         cell.backgroundColor = .cyan
         cell.layer.cornerRadius = 15
-        
+        if editDan == .edit{
+            cell.deleteButton.isHidden = true
+        }
+        else{
+            cell.deleteButton.isHidden = false
+        }
+                
         return cell
     }
+    
+    
 
 }
 
 extension TasksViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: UIScreen.main.bounds.width - 20, height: 150)
+        CGSize(width: UIScreen.main.bounds.width - 20, height: 100)
     }
     
 }
